@@ -23,7 +23,7 @@ function create(product)
         console.log(newproduct)
         products.push(newproduct)
         writeDatatoFile('products.json',products)
-        resolve(newproduct)
+        resolve(newproduct) 
     })
 }
 
