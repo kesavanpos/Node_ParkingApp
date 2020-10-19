@@ -70,9 +70,9 @@ async function updateProduct(req,res,Id)
                 price : price || product.price
             }
 
-            const product = await productModel.update(id,updateproduct);               
+            const updatedproduct = await productModel.update(id,updateproduct);               
             res.writeHead(200,{'Content-Type':'application/json'})
-            res.end(JSON.stringify(updateproduct)); 
+            res.end(JSON.stringify(updatedproduct)); 
         }
         
     } catch (error) {
