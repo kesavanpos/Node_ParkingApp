@@ -35,11 +35,46 @@ async function getProductById(req,res,id)
 async function createProduct(req,res)
 {
     try {
-        const newProduct = await getModel(req)        
-        const product = await productModel.create(newProduct);   
-        console.log(product)             
+        const body = await getModel(req)     
+        const { title,description,price} = JSON.parse(body)        
+        const product = { title,description,price}
         res.writeHead(201,{'Content-Type':'application/json'})
         res.end(JSON.stringify(product));       
+    } catch (error) {
+        res.writeHead(200,{'Content-Type':'application/json'})
+        res.end(JSON.stringify({message : error.toString()}));
+    }
+}
+
+async function updateProduct(req,res,Id)
+{
+    try {
+
+        const product = productModel.findById(Id);
+
+        if(!product)
+        {
+            res.writeHead(201,{'Content-Type':'application/json'})
+            res.end(JSON.stringify({message : "Product Not Found !"}));       
+        }
+        else
+        {
+            const body = await getModel(req)     
+            const { title,description,price} = JSON.parse(body)
+
+            const product = { title,description,price}
+
+            const updateproduct = {
+                title : title || product.title,
+                description : description || product.description,
+                price : price || product.price
+            }
+
+            const product = await productModel.update(id,updateproduct);               
+            res.writeHead(200,{'Content-Type':'application/json'})
+            res.end(JSON.stringify(updateproduct)); 
+        }
+        
     } catch (error) {
         res.writeHead(200,{'Content-Type':'application/json'})
         res.end(JSON.stringify(error));   
@@ -47,8 +82,10 @@ async function createProduct(req,res)
     }
 }
 
+
 module.exports = {
     getProducts,
     getProductById,
-    createProduct
+    createProduct,
+    updateProduct
 }
