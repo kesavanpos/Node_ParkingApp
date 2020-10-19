@@ -40,10 +40,9 @@ function update(id,product)
 
 function remove(id)
 {
-    return new Promise((resolve,reject) =>{
-      
-        const deleteProducts = products.filter((p) => p.id !== id)        
-        writeDatatoFile('products.json',deleteProducts)
+    return new Promise((resolve,reject) =>{      
+        products = products.filter((p) => p.id !== id)        
+        writeDatatoFile('products.json',products)
         resolve() 
     })
 }
