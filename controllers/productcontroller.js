@@ -82,10 +82,23 @@ async function updateProduct(req,res,Id)
     }
 }
 
+async function deleteProduct(req,res,id)
+{
+    try {
+        await productModel.remove(id);
+        res.writeHead(201,{'Content-Type':'application/json'})
+        res.end(JSON.stringify({message : 'Product `$(id)` removed successfully !'}));       
+    } catch (error) {
+        res.writeHead(200,{'Content-Type':'application/json'})
+        res.end(JSON.stringify({message : error.toString()}));
+    }
+}
+
 
 module.exports = {
     getProducts,
     getProductById,
     createProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct
 }
