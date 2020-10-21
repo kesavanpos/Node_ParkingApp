@@ -1,6 +1,6 @@
 const productModel = require('../model/productmodel')
 const { getModel } = require('../util/util')
-const {pool} = require('./config')
+const {pool} = require('../config')
 
 async function getProducts(req,res)
 {
