@@ -1,10 +1,17 @@
 let products = require('../products.json')
 const { getModel,writeDatatoFile } = require('../util/util')
 const { v4:uuidv4 } = require('uuid')
+const {pool} = require('../config')
 
 function findAll(){
     return new Promise((resolve,reject) =>{
-        resolve(products)
+        pool.query('SELECT * FROM accounts', (error, results) => {
+            if (error) {
+              throw error
+            }
+
+            resolve(results.rows);
+          })
     })
 }
 

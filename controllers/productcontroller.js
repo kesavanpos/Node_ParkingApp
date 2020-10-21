@@ -1,22 +1,13 @@
 const productModel = require('../model/productmodel')
 const { getModel } = require('../util/util')
-const {pool} = require('../config')
+
 
 async function getProducts(req,res)
 {
     try {
-        pool.query('SELECT * FROM accounts', (error, results) => {
-            if (error) {
-              throw error
-            }
-        
-            res.writeHead(200,{'Content-Type':'application/json'})
-            res.end(JSON.stringify(results.rows));
-          })
-        
-        //const products = await productModel.findAll()        
-        // res.writeHead(200,{'Content-Type':'application/json'})
-        // res.end(JSON.stringify(products));       
+        const products = await productModel.findAll()        
+        res.writeHead(200,{'Content-Type':'application/json'})
+        res.end(JSON.stringify(products));       
     } catch (error) {
         res.writeHead(200,{'Content-Type':'application/json'})
         res.end(JSON.stringify(error));   
