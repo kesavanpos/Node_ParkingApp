@@ -7,10 +7,11 @@ function findAll(){
     return new Promise((resolve,reject) =>{
         pool.query('SELECT * FROM accounts', (error, results) => {
             if (error) {
-              throw error
+              reject(error)
             }
-
-            resolve(results.rows);
+            else{
+                resolve(results.rows)
+            }
           })
     })
 }
