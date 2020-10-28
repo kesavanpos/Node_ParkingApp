@@ -1,12 +1,13 @@
 const http = require('http')
-const { getProducts,getProductById,
-      createProduct,updateProduct,
-      deleteProduct } = require('./controllers/productcontroller')
 
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const user = require('./routes/user')
+const product = require('./routes/product')
+const auth = require('./routes/auth')
 
+const {verifyUser} = require('./routes/middleware')
 
 const app = express()
 
@@ -14,9 +15,17 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cors())
 
-app.route('/api/products')
-      .get(getProducts)
-      .post(createProduct)
+
+app.use("/api/v1/products",verifyUser,product)
+app.use("/api/v1/auth",auth)
+
+// app.route('/api/products')
+//       .get(getProducts)
+//       .post(createProduct)
+
+// app.route('/api/user')
+//       .get(getUser)
+//       .post(createUser)
       
 
 const PORT = process.env.PORT || 5000
