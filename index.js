@@ -19,6 +19,7 @@ app.use(cors())
 app.use("/api/v1/products",verifyUser,product)
 app.use("/api/v1/auth",auth)
 
+// before implmenting middleware and all functions
 // app.route('/api/products')
 //       .get(getProducts)
 //       .post(createProduct)
@@ -33,6 +34,8 @@ const PORT = process.env.PORT || 5000
 app.listen(PORT,() => {
   console.log(`Server is listening ${PORT}`)
 })
+
+// Without Express framework with plain javascript
 
 // const server = http.createServer((req,res) =>{  
 //     if(req.url === '/api/products' && req.method === 'GET')
