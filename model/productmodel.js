@@ -1,7 +1,7 @@
 let products = require('../products.json')
 const { getModel,writeDatatoFile } = require('../util/util')
 const { v4:uuidv4 } = require('uuid')
-const {pool} = require('../config')
+const {pool} = require('../config/config')
 
 function findAll(){
     return new Promise((resolve,reject) =>{
