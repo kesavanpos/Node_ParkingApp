@@ -6,15 +6,18 @@ const cors = require('cors')
 const user = require('./routes/user')
 const product = require('./routes/product')
 const auth = require('./routes/auth')
+const cookieParser = require('cookie-parser');
 
 const {verifyUser} = require('./routes/middleware')
 
 const app = express()
 
+// middleware for parsing json objects - options
 app.use(bodyParser.json())
+//middleware for parsing bodies from URL
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(cookieParser());
 app.use(cors())
-
 
 app.use("/api/v1/products",verifyUser,product)
 app.use("/api/v1/auth",auth)

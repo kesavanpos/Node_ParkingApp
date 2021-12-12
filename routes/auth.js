@@ -5,6 +5,7 @@ const { login,refresh } = require('../controllers/authcontroller')
 
 router.post('/login', function(req, res){
    login(req,res);
+   console.log('login done');
 });
 
 router.post('/refresh',function(req,res){
