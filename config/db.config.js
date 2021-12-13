@@ -1,6 +1,7 @@
 const env = require('./config');
 const sequelize = require('sequelize');
 const {customer} = require("../model/customermodel")
+const { users } = require("../model/usermodel")
 
 const seq = new sequelize(env.database,env.username,env.password,{
     host: env.host,
@@ -20,5 +21,6 @@ db.Sequelize =  Sequelize;
 db.sequelize  = seq;
 
 db.Customers = customer(sequelize,Sequelize);
+db.Users = users(sequelize,this.Sequelize);
 
 module.exports = db;
